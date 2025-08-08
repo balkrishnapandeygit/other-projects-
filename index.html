@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hacking Simulator</title>
+  <style>
+    body {
+      background-color: black;
+      color: lime;
+      font-family: 'Courier New', monospace;
+      font-size: 18px;
+      padding: 20px;
+    }
+
+    .message {
+      margin: 10px 0;
+    }
+
+    .dots::after {
+      content: "...";
+      animation: blink 1s steps(3, start) infinite;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="output"></div>
+
+  <script>
+    const messages = [
+      "Initializing Hacking",
+      "Reading your Files",
+      "Password files Detected",
+      "Sending all passwords and personal files to server",
+      "Cleaning up"
+    ];
+
+    const output = document.getElementById('output');
+
+    let i = 0;
+
+    function showNextMessage() {
+      if (i >= messages.length) return;
+
+      const msg = document.createElement('div');
+      msg.className = 'message dots';
+      msg.textContent = messages[i];
+
+      output.appendChild(msg);
+
+      // Scroll down automatically
+      window.scrollTo(0, document.body.scrollHeight);
+
+      // Random delay between 1 to 7 seconds
+      const delay = Math.floor(Math.random() * 7000) + 1000;
+
+      i++;
+      setTimeout(showNextMessage, delay);
+    }
+
+    showNextMessage();
+  </script>
+
+</body>
+</html>
